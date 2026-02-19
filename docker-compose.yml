@@ -1,5 +1,4 @@
 services:
-  # MQTT Broker (Mosquitto)
   mqtt-broker:
     image: eclipse-mosquitto:2.0
     container_name: mqtt-broker
