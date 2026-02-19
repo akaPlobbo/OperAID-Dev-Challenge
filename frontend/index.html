@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQTT Aggregation Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 MQTT Aggregation Dashboard</h1>
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="status-dot connected" id="connectionDot"></span>
+                    <span id="connectionStatus">Verbindung wird hergestellt...</span>
+                </div>
+                <div class="status-item">
+                    <span>Daten aktualisiert</span>: <strong id="updateCount">0</strong>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="chart-container">
+                <h2>📊 Maschinen-Vergleich (Letzte 60 Sekunden)</h2>
+                <canvas id="barChart"></canvas>
+            </div>
+
+            <div class="dashboard" id="dashboard">
+                <div class="no-data">
+                    <div class="no-data-icon">⏳</div>
+                    <h2>Warte auf Daten...</h2>
+                    <p>Stelle sicher, dass MQTT Broker und Simulator laufen</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Live-Echtzeit-Dashboard | Aggregation über 60 Sekunden</p>
+        </footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

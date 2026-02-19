@@ -1,0 +1,54 @@
+services:
+  # MQTT Broker (Mosquitto)
+  mqtt-broker:
+    image: eclipse-mosquitto:2.0
+    container_name: mqtt-broker
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_logs:/mosquitto/log
+    healthcheck:
+      test: ["CMD", "mosquitto_pub", "-h", "localhost", "-t", "health", "-m", "test"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - mqtt-network
+
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mqtt-app
+    ports:
+      - "8000:8000"
+    depends_on:
+      mqtt-broker:
+        condition: service_healthy
+    environment:
+      - MQTT_BROKER=mqtt-broker
+      - MQTT_PORT=1883
+    volumes:
+      - backend:/app/backend
+      - frontend:/app/frontend
+    networks:
+      - mqtt-network
+    restart: unless-stopped
+
+volumes:
+  backend:
+    name: backend
+  frontend:
+    name: frontend
+  mosquitto_data:
+    name: mosquitto_data
+  mosquitto_logs:
+    name: mosquitto_logs
+networks:
+  mqtt-network:
+    driver: bridge
