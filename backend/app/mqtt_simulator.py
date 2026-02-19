@@ -20,7 +20,7 @@ def generate_data(machine_id: str, scrap_index: int):
     return {
         "maschinenId": machine_id,
         "scrapeIndex": scrap_index,
-        "value": round(random.randint(1, 5), 2),
+        "value": round(random.uniform(1.0, 5.0), 2),
         "zeitstempel": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     }
 
