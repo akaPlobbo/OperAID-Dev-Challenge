@@ -84,7 +84,7 @@ python backend/app/mqtt_simulator.py
 
 ## Datenformat
 
-Der Aggregator akzeptiert folgende Felder (mehrsprachig/tolerant):
+Der Aggregator akzeptiert folgende Felder:
 
 - Maschine: `machineId` oder `maschinenId`
 - Index: `scrapIndex` oder `scrapeIndex`
@@ -95,10 +95,10 @@ Beispiel-Payload:
 
 ```json
 {
-  "maschinenId": "A1",
+  "machineId": "A1",
   "scrapeIndex": 2,
   "value": 4,
-  "zeitstempel": "2026-01-01T12:00:00Z"
+  "timestamp": "2026-01-01T12:00:00Z"
 }
 ```
 
